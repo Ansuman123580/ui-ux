@@ -52,7 +52,7 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
   <div class="card">
     <div class="badge">Payment Confirmed • Single-User License</div>
     <h1>Thank you for your purchase! ⚡</h1>
-    <p>Aapka <strong>Obsidian Motion — Awwwards Motion &amp; Component Vault</strong> ka access ready hai. Is pack me sabhi motion studies, source files, aur components shamil hain.</p>
+    <p>Your access to the <strong>Obsidian Motion — Awwwards Motion &amp; Component Vault</strong> is ready. This package includes all production-grade motion studies, source files, and React components.</p>
     
     <div style="text-align: center;">
       <a href="${primaryDownload.url}" class="btn" target="_blank">📥 ${primaryDownload.name}</a>
@@ -70,9 +70,9 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
         🔒 Anti-Piracy &amp; Download Limit Notice:
       </div>
       <p style="color: #d4d4d8; font-size: 12px; line-height: 1.5; margin: 0;">
-        Yeh download link aapke email (<strong>${toEmail}</strong>) ke sath cryptographically locked hai. 
-        Is link se <strong>maximum 3 baar hi download</strong> kiya ja sakta hai (Valid 24 hours). 
-        Kripya is link ko public groups ya kisi ke sath share na karein — 3 downloads exceed hote hi link permanently deactivate ho jayega.
+        This download link is cryptographically tied to your email (<strong>${toEmail}</strong>). 
+        This link permits a <strong>maximum of 3 downloads</strong> (valid for 24 hours). 
+        Please do not distribute or share this link publicly — once 3 downloads are reached, the link is permanently deactivated.
       </p>
     </div>
 

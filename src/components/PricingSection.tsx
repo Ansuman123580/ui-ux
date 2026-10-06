@@ -19,7 +19,7 @@ export const PricingSection: React.FC = () => {
     try {
       return text ? JSON.parse(text) : {};
     } catch {
-      throw new Error('Payment server response नहीं मिला। कृपया सुनिश्चित करें कि backend server सक्रिय है।');
+      throw new Error('Unable to parse payment gateway response. Please check your network connection.');
     }
   };
 
@@ -29,7 +29,7 @@ export const PricingSection: React.FC = () => {
 
   const handleUpgrade = async () => {
     if (!validateEmail(email)) {
-      setPaymentError('कृपया मान्य Email Address दर्ज करें ताकि files आपके इनबॉक्स में डिलीवर की जा सकें।');
+      setPaymentError('Please enter a valid email address so your download links and license can be delivered.');
       return;
     }
 
@@ -40,13 +40,13 @@ export const PricingSection: React.FC = () => {
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
       await new Promise<void>((resolve, reject) => {
         script.onload = () => resolve();
-        script.onerror = () => reject(new Error('Razorpay checkout load नहीं हुआ'));
+        script.onerror = () => reject(new Error('Failed to load Razorpay checkout script.'));
         document.body.appendChild(script);
       });
 
       const orderResponse = await fetch('/api/create-order', { method: 'POST' });
       const order = await readJson(orderResponse);
-      if (!orderResponse.ok) throw new Error(order.error || 'Order create नहीं हुआ');
+      if (!orderResponse.ok) throw new Error(order.error || 'Failed to initialize payment order.');
 
       const Razorpay = (window as unknown as { Razorpay: new (options: Record<string, unknown>) => { open: () => void } }).Razorpay;
       const checkout = new Razorpay({
@@ -72,7 +72,7 @@ export const PricingSection: React.FC = () => {
               body: JSON.stringify({ ...response, email: email.trim() }),
             });
             const result = await readJson(verifyResponse);
-            if (!verifyResponse.ok) throw new Error(result.error || 'Payment verification failed');
+            if (!verifyResponse.ok) throw new Error(result.error || 'Payment verification failed.');
             
             setDownloads(result.downloads || []);
             setDeliveryInfo({
@@ -88,7 +88,7 @@ export const PricingSection: React.FC = () => {
               colors: ['#00f2fe', '#8a2be2', '#10b981', '#f59e0b'],
             });
           } catch (err) {
-            setPaymentError(err instanceof Error ? err.message : 'Verification me samasya aayi');
+            setPaymentError(err instanceof Error ? err.message : 'Payment verification encountered an error.');
           } finally {
             setIsLoading(false);
           }
@@ -96,7 +96,7 @@ export const PricingSection: React.FC = () => {
       });
       checkout.open();
     } catch (error) {
-      setPaymentError(error instanceof Error ? error.message : 'Payment शुरू नहीं हो सका');
+      setPaymentError(error instanceof Error ? error.message : 'Could not initialize payment session.');
     } finally {
       setIsLoading(false);
     }
@@ -110,13 +110,13 @@ export const PricingSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Special Verification Pass</span>
+            <span>Lifetime Commercial Pass</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Unlock Full Awwwards Motion Pack
+            Unlock Full Obsidian Motion Vault
           </h2>
           <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-            Razorpay payment verification test. Payment karte hi files screen aur aapke email par bhej di jayengi.
+            One-time payment for lifetime updates. Instant on-screen download access and automated delivery straight to your email inbox.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export const PricingSection: React.FC = () => {
                 </span>
               </div>
               <p className="text-zinc-400 text-xs mt-3 leading-relaxed">
-                296+ Awwwards Motion references, 8+ live physics components, source code, and full Google Drive archive.
+                296+ Awwwards Motion references, 8+ live physics components, production source code, and full Google Drive cloud mirrors.
               </p>
 
               <div className="mt-6 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-baseline justify-between">
@@ -153,7 +153,7 @@ export const PricingSection: React.FC = () => {
                     </span>
                   </div>
                   <span className="text-[11px] text-cyan-400 font-mono mt-1 block">
-                    एक बार का भुगतान • Lifetime updates included
+                    One-time payment • Lifetime updates &amp; mirrors included
                   </span>
                 </div>
                 <div className="text-right">
@@ -179,12 +179,12 @@ export const PricingSection: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => { setEmail(e.target.value); setPaymentError(''); }}
-                    placeholder="name@gmail.com"
+                    placeholder="name@company.com"
                     className="w-full px-4 py-3 rounded-xl bg-zinc-900/90 border border-white/10 text-white text-xs font-mono placeholder:text-zinc-600 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all shadow-inner"
                   />
                 </div>
                 <p className="mt-1.5 text-[11px] text-zinc-500 font-mono">
-                  Payment hone ke baad download link isi email par bhej diya jayega.
+                  Your encrypted download links and cloud mirror will be delivered to this email upon payment.
                 </p>
               </div>
 
@@ -194,7 +194,7 @@ export const PricingSection: React.FC = () => {
                   'Instant Google Drive Cloud Mirror link delivered',
                   'React 19 + Tailwind + Framer Motion components',
                   'Commercial license for client & personal projects',
-                  'Verified through Razorpay UPI, Cards & Netbanking',
+                  'Verified checkout via Razorpay UPI, Cards & Netbanking',
                 ].map((feat, i) => (
                   <li key={i} className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-cyan-400 flex-shrink-0" />
@@ -212,12 +212,12 @@ export const PricingSection: React.FC = () => {
               {isLoading ? (
                 <>
                   <LoaderCircle className="w-4 h-4 animate-spin" />
-                  <span>Processing...</span>
+                  <span>Processing Checkout...</span>
                 </>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  <span>₹400 me Pro Access lein (Razorpay)</span>
+                  <span>Unlock Lifetime Access — ₹400</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -243,23 +243,23 @@ export const PricingSection: React.FC = () => {
                   PAYMENT VERIFIED • ACCESS UNLOCKED
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-white mt-1">
-                  Aapki files ready hain! 🎉
+                  Your files are ready to download! 🎉
                 </h3>
                 
                 {deliveryInfo?.sent ? (
                   <p className="mt-2 text-xs text-emerald-300/90 leading-relaxed font-mono">
-                    ✅ Confirmation mail &amp; download access link <strong>{deliveryInfo.target}</strong> par bhej diya gaya hai (inbox &amp; spam folder check karein).
+                    ✅ Confirmation email and secure download access links have been sent to <strong>{deliveryInfo.target}</strong> (please check your inbox and spam folder).
                   </p>
                 ) : (
                   <p className="mt-2 text-xs text-zinc-300 leading-relaxed font-mono">
-                    ⚡ Instant access links ready hain! Aap direct niche diye gaye links se files download kar sakte hain:
+                    ⚡ Instant download access is active below. You can download the complete bundle directly from the secure mirrors:
                   </p>
                 )}
 
                 <div className="mt-3.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[11px] font-mono leading-relaxed flex items-start gap-2">
                   <span className="text-sm">🔒</span>
                   <div>
-                    <strong>Anti-Piracy Protected:</strong> Yeh links aapke email se locked hain aur maximum <strong>3 baar hi download</strong> kiye ja sakte hain (24h validity). Kisi ke sath link share na karein, 3 downloads ke baad link permanently deactivate ho jayega.
+                    <strong>Anti-Piracy Security Active:</strong> These download links are cryptographically locked to your email address and permit a maximum of <strong>3 downloads</strong> (valid for 24 hours). Please do not share these links publicly; exceeding 3 downloads permanently deactivates the token.
                   </div>
                 </div>
 

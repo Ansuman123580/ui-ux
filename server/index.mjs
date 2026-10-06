@@ -213,7 +213,7 @@ const server = createServer(async (req, res) => {
         return sendHtmlError(
           res,
           'Access Denied (Invalid Link)',
-          'Yeh download token invalid hai ya server par register nahi hai.',
+          'This download link is invalid or does not exist on the server.',
           `Token: ${tokenStr || 'missing'}`
         );
       }
@@ -223,7 +223,7 @@ const server = createServer(async (req, res) => {
         return sendHtmlError(
           res,
           'Link Expired ⏳',
-          'Aapka download link 24 ghante ke baad expire ho chuka hai. Agar aapko access reopen karwana hai, to support se contact karein.',
+          'This download link has expired (24-hour validity limit). Please contact support if you need your access reopened.',
           `Order ID: ${tokenData.orderId || 'N/A'}`
         );
       }
@@ -233,7 +233,7 @@ const server = createServer(async (req, res) => {
         return sendHtmlError(
           res,
           'Download Limit Exceeded 🚫',
-          `Aap is link se maximum allow kiye gaye (${tokenData.maxDownloads}/${tokenData.maxDownloads}) downloads complete kar chuke hain. Unauthorized sharing aur piracy se bachne ke liye yeh link permanently deactivate kar diya gaya hai.`,
+          `You have reached the maximum allowed downloads (${tokenData.maxDownloads}/${tokenData.maxDownloads}) for this license. To protect against unauthorized sharing and piracy, this link has been permanently deactivated.`,
           `Licensed to: ${tokenData.email} • Order: ${tokenData.orderId}`
         );
       }
