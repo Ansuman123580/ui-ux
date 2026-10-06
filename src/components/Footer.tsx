@@ -9,12 +9,13 @@ export const Footer: React.FC = () => {
           <div className="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center">
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
           </div>
-          <span className="text-zinc-300 font-bold tracking-tight">KINETIC UI</span>
-          <span>— Next-Gen Animated Component Laboratory</span>
+          <span className="text-zinc-300 font-bold tracking-tight">OBSIDIAN MOTION</span>
+          <span>— Awwwards Motion &amp; Component Vault</span>
         </div>
 
         <div className="flex items-center gap-6">
           <a href="#components" className="hover:text-zinc-300 transition-colors">Components</a>
+          <a href="#animation-library" className="hover:text-zinc-300 transition-colors">Animations</a>
           <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
           <a href="#faq" className="hover:text-zinc-300 transition-colors">FAQ</a>
           <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-white transition-colors">
@@ -25,7 +26,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="font-mono text-[11px]">
-          © 2026 Kinetic UI. All rights reserved.
+          © {new Date().getFullYear()} Obsidian Motion. All rights reserved.
         </div>
       </div>
     </footer>

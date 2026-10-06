@@ -1,4 +1,4 @@
-# Kinetic UI — Awwwards-tier Animated Component Library
+# Obsidian Motion — Awwwards-tier Animated Component & Motion Vault
 
 A modern, high-performance UI interaction and animation laboratory built with React 19, TypeScript, Tailwind CSS, Framer Motion, and Razorpay integration.
 

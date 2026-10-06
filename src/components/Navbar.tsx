@@ -27,13 +27,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-base tracking-tight text-white font-sans">
-                KINETIC<span className="text-cyan-400">UI</span>
+                OBSIDIAN<span className="text-cyan-400">MOTION</span>
               </span>
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-medium">
                 v2.0
               </span>
             </div>
-            <span className="text-[10px] text-zinc-400 tracking-wider -mt-1 font-mono">LIVE COMPONENT LAB</span>
+            <span className="text-[10px] text-zinc-400 tracking-wider -mt-1 font-mono">AWWWARDS MOTION VAULT</span>
           </div>
         </div>
 

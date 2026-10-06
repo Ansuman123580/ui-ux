@@ -49,7 +49,7 @@ export const CodeModal: React.FC<CodeModalProps> = ({ component, onClose }) => {
   };
 
   const handleCopyNpx = () => {
-    navigator.clipboard.writeText(`npx kinetic-ui add ${component.id}`);
+    navigator.clipboard.writeText(`npx obsidian-motion add ${component.id}`);
     setCopiedNpx(true);
     setTimeout(() => setCopiedNpx(false), 2000);
   };
@@ -138,7 +138,7 @@ export const CodeModal: React.FC<CodeModalProps> = ({ component, onClose }) => {
               >
                 <div className="flex items-center gap-2 overflow-hidden text-ellipsis">
                   <Terminal className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                  <span className="truncate">npx kinetic-ui add {component.id}</span>
+                  <span className="truncate">npx obsidian-motion add {component.id}</span>
                 </div>
                 {copiedNpx ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-zinc-400" />}
               </div>

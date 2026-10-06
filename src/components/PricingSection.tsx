@@ -53,8 +53,8 @@ export const PricingSection: React.FC = () => {
         key: order.keyId,
         amount: order.amount,
         currency: order.currency,
-        name: 'Kinetic UI',
-        description: 'Awwwards Animation Pack — ₹400 Lifetime Access',
+        name: 'Obsidian Motion',
+        description: 'Obsidian Motion Pack — ₹400 Lifetime Access',
         order_id: order.orderId,
         prefill: {
           email: email.trim(),

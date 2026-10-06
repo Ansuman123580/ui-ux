@@ -34,7 +34,7 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Kinetic UI Pro Pack is Ready</title>
+  <title>Your Obsidian Motion Pro Pack is Ready</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #08090d; color: #f4f4f5; margin: 0; padding: 24px; }
     .card { max-width: 600px; margin: 0 auto; background: #0f1117; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; }
@@ -52,7 +52,7 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
   <div class="card">
     <div class="badge">Payment Confirmed • Single-User License</div>
     <h1>Thank you for your purchase! ⚡</h1>
-    <p>Aapka <strong>Kinetic UI — Awwwards Motion &amp; Component Pack</strong> ka access ready hai. Is pack me sabhi motion studies, source files, aur components shamil hain.</p>
+    <p>Aapka <strong>Obsidian Motion — Awwwards Motion &amp; Component Vault</strong> ka access ready hai. Is pack me sabhi motion studies, source files, aur components shamil hain.</p>
     
     <div style="text-align: center;">
       <a href="${primaryDownload.url}" class="btn" target="_blank">📥 ${primaryDownload.name}</a>
@@ -84,7 +84,7 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
     </div>
 
     <div class="footer">
-      © ${new Date().getFullYear()} Kinetic UI Studio. Protected by dynamic token validation.
+      © ${new Date().getFullYear()} Obsidian Motion Studio. Protected by dynamic token validation.
     </div>
   </div>
 </body>
@@ -104,10 +104,10 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
 
   try {
     const info = await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"Kinetic UI" <${process.env.SMTP_USER}>`,
+      from: process.env.SMTP_FROM || `"Obsidian Motion" <${process.env.SMTP_USER}>`,
       to: toEmail,
-      subject: '⚡ [Secure Access] Your Kinetic UI Pro Pack (Max 3 Downloads)',
-      text: `Thank you for purchasing Kinetic UI Pro Pack!\n\nYour protected download link: ${primaryDownload.url}\n\nNote: Maximum 3 downloads allowed within 24 hours. Do not share this link.\n\nOrder ID: ${orderId}\nPayment ID: ${paymentId}`,
+      subject: '⚡ [Secure Access] Your Obsidian Motion Pro Pack (Max 3 Downloads)',
+      text: `Thank you for purchasing Obsidian Motion Pro Pack!\n\nYour protected download link: ${primaryDownload.url}\n\nNote: Maximum 3 downloads allowed within 24 hours. Do not share this link.\n\nOrder ID: ${orderId}\nPayment ID: ${paymentId}`,
       html: htmlContent,
     });
 

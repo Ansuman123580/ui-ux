@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 const FAQS = [
   {
     q: "How does this compare to other component libraries?",
-    a: "Unlike typical libraries that only give you static cards or videos, Kinetic UI focuses specifically on high-end award-winning interactions (spring physics, cursor-reactive spotlights, WebGL shaders, 3D tilt, and holographic borders) that make modern websites feel truly premium."
+    a: "Unlike typical libraries that only give you static cards or videos, Obsidian Motion focuses specifically on high-end award-winning interactions (spring physics, cursor-reactive spotlights, WebGL shaders, 3D tilt, and holographic borders) that make modern websites feel truly premium."
   },
   {
     q: "Can I use these components in commercial client projects?",
@@ -16,7 +16,7 @@ const FAQS = [
   },
   {
     q: "How do I install components into my project?",
-    a: "You can either copy and paste the clean React / Tailwind / CSS code straight from the component code inspector, or use our upcoming CLI tool: 'npx kinetic-ui add <component-name>'."
+    a: "You can either copy and paste the clean React / Tailwind / CSS code straight from the component code inspector, or use our CLI tool: 'npx obsidian-motion add <component-name>'."
   }
 ];
 

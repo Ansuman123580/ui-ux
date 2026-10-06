@@ -134,8 +134,8 @@ const server = createServer(async (req, res) => {
       const order = await razorpayRequest('/orders', {
         amount: PRICE_PAISE,
         currency: 'INR',
-        receipt: `kinetic_${Date.now()}`,
-        notes: { product: 'Kinetic UI Awwwards Pack (₹1 Special Access)' },
+        receipt: `obsidian_${Date.now()}`,
+        notes: { product: 'Obsidian Motion Awwwards Vault (₹400 Lifetime Access)' },
       });
       orders.set(order.id, { createdAt: Date.now() });
       return send(res, 200, { keyId: KEY_ID, orderId: order.id, amount: order.amount, currency: order.currency });

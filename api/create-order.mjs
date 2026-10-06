@@ -14,8 +14,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         amount: PRICE_PAISE,
         currency: 'INR',
-        receipt: `kinetic_${Date.now()}`,
-        notes: { product: 'Kinetic UI Awwwards Motion Pack (₹400 Lifetime Access)' },
+        receipt: `obsidian_${Date.now()}`,
+        notes: { product: 'Obsidian Motion Awwwards Vault (₹400 Lifetime Access)' },
       }),
     });
     const data = await response.json();

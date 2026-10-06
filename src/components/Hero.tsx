@@ -14,7 +14,7 @@ export const Hero: React.FC<HeroProps> = ({ onExplore }) => {
   const [heroGlow, setHeroGlow] = useState('#00f2fe');
 
   const handleCopyCli = () => {
-    navigator.clipboard.writeText('npx kinetic-ui init');
+    navigator.clipboard.writeText('npx obsidian-motion init');
     setCopiedCli(true);
     confetti({
       particleCount: 40,
@@ -94,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ onExplore }) => {
               className="cursor-pointer px-4 py-3 rounded-xl bg-zinc-900/90 border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white transition-all flex items-center gap-3 font-mono text-xs backdrop-blur-md shadow-lg"
             >
               <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-              <span>npx kinetic-ui init</span>
+              <span>npx obsidian-motion init</span>
               <button 
                 type="button" 
                 aria-label="Copy CLI command"
