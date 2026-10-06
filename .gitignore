@@ -32,3 +32,4 @@ dist-ssr
 *.mp4
 *.zip
 src/assets/awwwards/
+server/download_tokens.json
