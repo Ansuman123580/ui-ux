@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 v2.0
               </span>
             </div>
-            <span className="text-[10px] text-zinc-400 tracking-wider -mt-1 font-mono">AWWWARDS MOTION VAULT</span>
+            <span className="text-[10px] text-zinc-400 tracking-wider -mt-1 font-mono">DIGITAL UI &amp; MOTION ASSETS</span>
           </div>
         </div>
 

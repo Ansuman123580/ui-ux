@@ -17,6 +17,14 @@ const FAQS = [
   {
     q: "How do I install components into my project?",
     a: "You can either copy and paste the clean React / Tailwind / CSS code straight from the component code inspector, or use our CLI tool: 'npx obsidian-motion add <component-name>'."
+  },
+  {
+    q: "How and when are the digital files delivered after purchase?",
+    a: "Obsidian Motion sells 100% digital goods. Upon successful payment verification via Razorpay, you receive immediate access to the full digital downloadable archives directly on your screen, plus an automated email confirmation within 5 minutes. No physical shipping is required."
+  },
+  {
+    q: "What is your refund and support policy?",
+    a: "We offer a 7-day technical satisfaction guarantee. If you experience any technical defect or cannot access your digital files, our dedicated support team (support@obsidianmotion.store) will assist you within 24 hours or issue a full refund."
   }
 ];
 

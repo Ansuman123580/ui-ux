@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
     const downloads = [
       {
-        name: 'Google Drive Cloud Mirror (Complete 5GB+ Motion Pack)',
+        name: 'Obsidian Motion Full Archive — Direct Digital Download (Complete Pack)',
         url: `/api/download/cloud?token=${signDownload('cloud')}`,
       },
       {

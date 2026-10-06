@@ -1,32 +1,101 @@
 import React from 'react';
-import { Zap } from 'lucide-react';
+import { Zap, ShieldCheck, Mail, FileText, RefreshCw, Truck } from 'lucide-react';
+import { PolicyTab } from './PolicyModal';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenPolicy?: (tab: PolicyTab) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
+  const handlePolicyClick = (e: React.MouseEvent, tab: PolicyTab) => {
+    e.preventDefault();
+    if (onOpenPolicy) {
+      onOpenPolicy(tab);
+    } else {
+      window.location.hash = `#${tab}`;
+    }
+  };
+
   return (
     <footer className="border-t border-white/[0.08] bg-zinc-950 py-12 text-xs text-zinc-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2.5">
-          <div className="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-8">
+        {/* Main Row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center">
+              <Zap className="w-3.5 h-3.5 text-cyan-400" />
+            </div>
+            <span className="text-zinc-300 font-bold tracking-tight">OBSIDIAN MOTION</span>
+            <span className="text-zinc-400 font-mono text-[11px]">— Digital UI Components &amp; Motion Assets</span>
           </div>
-          <span className="text-zinc-300 font-bold tracking-tight">OBSIDIAN MOTION</span>
-          <span>— Awwwards Motion &amp; Component Vault</span>
+
+          <div className="flex items-center gap-6">
+            <a href="#components" className="hover:text-zinc-300 transition-colors">Components</a>
+            <a href="#animation-library" className="hover:text-zinc-300 transition-colors">Animations</a>
+            <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
+            <a href="#faq" className="hover:text-zinc-300 transition-colors">FAQ</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-white transition-colors">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <div className="flex items-center gap-6">
-          <a href="#components" className="hover:text-zinc-300 transition-colors">Components</a>
-          <a href="#animation-library" className="hover:text-zinc-300 transition-colors">Animations</a>
-          <a href="#pricing" className="hover:text-zinc-300 transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-zinc-300 transition-colors">FAQ</a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-white transition-colors">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-            </svg>
-          </a>
+        {/* Razorpay Mandatory Compliance Links Row */}
+        <div className="pt-6 border-t border-white/[0.05] flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <a 
+              href="#terms" 
+              onClick={(e) => handlePolicyClick(e, 'terms')} 
+              className="text-zinc-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <FileText className="w-3.5 h-3.5" /> Terms &amp; Conditions
+            </a>
+            <a 
+              href="#privacy" 
+              onClick={(e) => handlePolicyClick(e, 'privacy')} 
+              className="text-zinc-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" /> Privacy Policy
+            </a>
+            <a 
+              href="#refund" 
+              onClick={(e) => handlePolicyClick(e, 'refund')} 
+              className="text-zinc-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <RefreshCw className="w-3.5 h-3.5" /> Refund Policy
+            </a>
+            <a 
+              href="#shipping" 
+              onClick={(e) => handlePolicyClick(e, 'shipping')} 
+              className="text-zinc-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <Truck className="w-3.5 h-3.5" /> Shipping &amp; Delivery
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => handlePolicyClick(e, 'contact')} 
+              className="text-zinc-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <Mail className="w-3.5 h-3.5" /> Contact Us
+            </a>
+          </div>
+
+          <div className="flex items-center gap-2 text-zinc-500">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Razorpay Verified • 256-Bit SSL Encrypted Checkout</span>
+          </div>
         </div>
 
-        <div className="font-mono text-[11px]">
-          © {new Date().getFullYear()} Obsidian Motion. All rights reserved.
+        {/* Bottom Details Row */}
+        <div className="pt-4 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-zinc-500">
+          <div>
+            © {new Date().getFullYear()} Obsidian Motion. Operated by Ansuman Maharana. All rights reserved.
+          </div>
+          <div>
+            Category: Digital Goods &amp; UI Design Software Templates
+          </div>
         </div>
       </div>
     </footer>

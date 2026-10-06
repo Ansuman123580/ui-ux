@@ -59,7 +59,7 @@ export const sendPurchaseEmail = async ({ toEmail, paymentId, orderId, downloadU
     </div>
 
     ${formattedUrls.length > 1 ? `
-    <p style="font-weight: 600; color: #fff; margin-bottom: 8px;">Direct Mirrors &amp; Downloads:</p>
+    <p style="font-weight: 600; color: #fff; margin-bottom: 8px;">Secure Digital Downloads &amp; Archives:</p>
     <ul style="padding-left: 20px;">
       ${formattedUrls.map(d => `<li style="margin-bottom: 10px;"><a href="${d.url}" style="color: #00f2fe; text-decoration: underline; font-size: 13px;">${d.name}</a></li>`).join('')}
     </ul>

@@ -169,7 +169,7 @@ const server = createServer(async (req, res) => {
       // Both downloads are securely tokenized with zero public exposure of the raw Drive link!
       const downloads = [
         {
-          name: 'Google Drive Cloud Mirror (Complete 5GB+ Motion Pack)',
+          name: 'Obsidian Motion Full Archive — Direct Digital Download (Complete Pack)',
           url: `/api/download/cloud?token=${token}`,
         },
         {

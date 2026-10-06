@@ -110,13 +110,13 @@ export const PricingSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono uppercase tracking-widest mb-4">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Lifetime Commercial Pass</span>
+            <span>Digital Software License</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Unlock Full Obsidian Motion Vault
           </h2>
           <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
-            One-time payment for lifetime updates. Instant on-screen download access and automated delivery straight to your email inbox.
+            One-time payment for lifetime updates. Instant on-screen digital download access and automated delivery straight to your email inbox.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export const PricingSection: React.FC = () => {
                 </span>
               </div>
               <p className="text-zinc-400 text-xs mt-3 leading-relaxed">
-                296+ Awwwards Motion references, 8+ live physics components, production source code, and full Google Drive cloud mirrors.
+                296+ Awwwards Motion references, 8+ live physics components, production source code, and full digital downloadable archive.
               </p>
 
               <div className="mt-6 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-baseline justify-between">
@@ -153,7 +153,7 @@ export const PricingSection: React.FC = () => {
                     </span>
                   </div>
                   <span className="text-[11px] text-cyan-400 font-mono mt-1 block">
-                    One-time payment • Lifetime updates &amp; mirrors included
+                    One-time payment • Lifetime updates &amp; digital downloads included
                   </span>
                 </div>
                 <div className="text-right">
@@ -170,7 +170,7 @@ export const PricingSection: React.FC = () => {
                     <Mail className="w-3.5 h-3.5 text-cyan-400" />
                     Delivery Email Address <span className="text-cyan-400">*</span>
                   </span>
-                  <span className="text-[10px] text-zinc-500">Google Drive &amp; files sent here</span>
+                  <span className="text-[10px] text-zinc-500">Instant digital delivery</span>
                 </label>
                 <div className="relative">
                   <input
@@ -184,16 +184,16 @@ export const PricingSection: React.FC = () => {
                   />
                 </div>
                 <p className="mt-1.5 text-[11px] text-zinc-500 font-mono">
-                  Your encrypted download links and cloud mirror will be delivered to this email upon payment.
+                  Your secure digital download links and source archive will be delivered to this email immediately upon payment.
                 </p>
               </div>
 
               <ul className="mt-6 space-y-2.5 text-xs text-zinc-300">
                 {[
                   '296+ Awwwards Motion Videos & Source files',
-                  'Instant Google Drive Cloud Mirror link delivered',
+                  'Instant digital download & source code archive',
                   'React 19 + Tailwind + Framer Motion components',
-                  'Commercial license for client & personal projects',
+                  'Commercial developer license for client & personal projects',
                   'Verified checkout via Razorpay UPI, Cards & Netbanking',
                 ].map((feat, i) => (
                   <li key={i} className="flex items-center gap-2.5">
@@ -222,6 +222,12 @@ export const PricingSection: React.FC = () => {
                 </>
               )}
             </button>
+
+            <div className="mt-3 text-center">
+              <span className="text-[10px] text-zinc-500 font-mono">
+                Product Category: Digital Goods (Developer UI Code &amp; Templates) • Instant Delivery
+              </span>
+            </div>
 
             {paymentError && (
               <div className="mt-3.5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-mono text-center">
@@ -252,7 +258,7 @@ export const PricingSection: React.FC = () => {
                   </p>
                 ) : (
                   <p className="mt-2 text-xs text-zinc-300 leading-relaxed font-mono">
-                    ⚡ Instant download access is active below. You can download the complete bundle directly from the secure mirrors:
+                    ⚡ Instant download access is active below. You can download the complete bundle directly from the secure digital download links below:
                   </p>
                 )}
 

@@ -11,11 +11,13 @@ import { PricingSection } from './components/PricingSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { AnimationLibrary } from './components/AnimationLibrary';
+import { PolicyModal, PolicyTab } from './components/PolicyModal';
 
 export const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryType>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [policyModalTab, setPolicyModalTab] = useState<PolicyTab | null>(null);
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('kinetic_favs');
@@ -26,6 +28,18 @@ export const App: React.FC = () => {
   });
   const [selectedComponent, setSelectedComponent] = useState<UIComponent | null>(null);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (['terms', 'privacy', 'refund', 'shipping', 'contact'].includes(hash)) {
+        setPolicyModalTab(hash as PolicyTab);
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   useEffect(() => {
     try {
@@ -135,7 +149,7 @@ export const App: React.FC = () => {
 
       <PricingSection />
       <FaqSection />
-      <Footer />
+      <Footer onOpenPolicy={(tab) => setPolicyModalTab(tab)} />
 
       <CommandMenu
         isOpen={isCommandOpen}
@@ -147,6 +161,17 @@ export const App: React.FC = () => {
       <CodeModal
         component={selectedComponent}
         onClose={() => setSelectedComponent(null)}
+      />
+
+      <PolicyModal
+        isOpen={policyModalTab !== null}
+        initialTab={policyModalTab || 'terms'}
+        onClose={() => {
+          setPolicyModalTab(null);
+          if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }}
       />
     </div>
   );
