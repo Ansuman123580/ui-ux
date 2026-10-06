@@ -72,47 +72,81 @@ interface AnimationLibraryProps {
 
 const LiveVideoCard: React.FC<{ src: string; className: string }> = ({ src, className }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Autoplay when visible on screen, pause when out of viewport for max 120 FPS performance
+    video.muted = true;
+    video.defaultMuted = true;
+
+    // Viewport-aware playback: Only decode & play when on screen to keep 120 FPS fluid
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(() => {});
+            }
           } else {
             video.pause();
           }
         });
       },
-      { threshold: 0.1 }
+      {
+        threshold: [0, 0.15, 0.5],
+        rootMargin: '40px 0px',
+      }
     );
 
     observer.observe(video);
-    return () => observer.disconnect();
+
+    // Pause playback when user switches tabs or window is minimized
+    const handleVisibility = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        const rect = video.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          video.play().catch(() => {});
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, [src]);
 
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      className={className}
-    />
+    <div className="relative w-full h-full bg-zinc-950 overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        onLoadedData={() => setIsLoaded(true)}
+        className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ willChange: 'transform' }}
+      />
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-zinc-900/60 animate-pulse" />
+      )}
+    </div>
   );
 };
 
 export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview }) => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [assetType, setAssetType] = useState<'video' | 'preview'>('video');
-  const [itemsToShow, setItemsToShow] = useState(24);
+  const [itemsToShow, setItemsToShow] = useState(12);
   const [activeModalVideo, setActiveModalVideo] = useState<string | null>(null);
 
   const currentAssets = assetType === 'video' ? videoAssets : imageAssets;
@@ -142,13 +176,13 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
               Production-Grade Motion Patterns
             </h2>
             <p className="mt-2.5 max-w-2xl text-sm text-zinc-400 leading-relaxed">
-              {videoAssets.length} live interactive motion references. All videos loop smoothly with intelligent viewport optimization.
+              {videoAssets.length} live interactive motion references. High-performance streaming with hardware GPU acceleration.
             </p>
           </div>
 
           <div className="flex items-center gap-1.5 rounded-2xl border border-white/10 bg-zinc-950/80 p-1.5 backdrop-blur-xl">
             <button
-              onClick={() => { setAssetType('video'); setActiveCategory('all'); setItemsToShow(24); }}
+              onClick={() => { setAssetType('video'); setActiveCategory('all'); setItemsToShow(12); }}
               className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-mono transition-all ${
                 assetType === 'video'
                   ? 'bg-cyan-400 text-zinc-950 font-bold shadow-lg shadow-cyan-400/20'
@@ -159,7 +193,7 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
               <span>Live Videos ({videoAssets.length})</span>
             </button>
             <button
-              onClick={() => { setAssetType('preview'); setActiveCategory('all'); setItemsToShow(24); }}
+              onClick={() => { setAssetType('preview'); setActiveCategory('all'); setItemsToShow(12); }}
               className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-mono transition-all ${
                 assetType === 'preview'
                   ? 'bg-cyan-400 text-zinc-950 font-bold shadow-lg shadow-cyan-400/20'
@@ -180,7 +214,7 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
             return (
               <button
                 key={category}
-                onClick={() => { setActiveCategory(category); setItemsToShow(24); }}
+                onClick={() => { setActiveCategory(category); setItemsToShow(12); }}
                 className={`whitespace-nowrap rounded-xl border px-3.5 py-1.5 text-xs font-mono transition-all ${
                   activeCategory === category
                     ? 'border-cyan-400/50 bg-cyan-400/15 text-cyan-300 shadow-md shadow-cyan-500/10 font-bold'
@@ -200,13 +234,14 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
           return (
             <div
               key={asset.name}
+              style={{ contentVisibility: 'auto', containIntrinsicSize: '200px' }}
               onClick={() => {
                 if (asset.type === 'video') {
                   setActiveModalVideo(asset.url);
                 }
                 onPreview?.(asset.url);
               }}
-              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-950/80 text-left transition-all hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-950/40 flex flex-col justify-between cursor-pointer"
+              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-950/90 text-left transition-all hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-950/40 flex flex-col justify-between cursor-pointer"
             >
               <div className="aspect-[4/3] overflow-hidden bg-zinc-950 relative">
                 {asset.type === 'video' ? (
@@ -224,14 +259,14 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
                 )}
 
                 {/* Subtle hover overlay with expand icon */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                   <div className="w-9 h-9 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg">
                     <Maximize2 className="w-4 h-4 text-cyan-300" />
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-1.5 px-3 py-2.5 border-t border-white/[0.04] bg-zinc-950/90">
+              <div className="flex items-center justify-between gap-1.5 px-3 py-2.5 border-t border-white/[0.04] bg-zinc-950">
                 <span className="truncate text-[11px] font-mono text-zinc-300 group-hover:text-white transition-colors" title={formattedTitle}>
                   {formattedTitle}
                 </span>
@@ -247,10 +282,10 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
       {visibleAssets.length < filteredAssets.length && (
         <div className="mt-10 flex justify-center">
           <button
-            onClick={() => setItemsToShow((count) => count + 24)}
+            onClick={() => setItemsToShow((count) => count + 12)}
             className="rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-6 py-3 text-xs font-mono font-semibold text-cyan-300 transition-all hover:bg-cyan-400/20 active:scale-95 shadow-lg shadow-cyan-400/10"
           >
-            Load 24 more ({filteredAssets.length - visibleAssets.length} remaining)
+            Load 12 more ({filteredAssets.length - visibleAssets.length} remaining)
           </button>
         </div>
       )}
