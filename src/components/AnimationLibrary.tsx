@@ -44,6 +44,14 @@ const getCategory = (name: string) => {
   return match?.[1].toLowerCase() ?? name.match(/^[a-z0-9]+/)?.[0] ?? 'other';
 };
 
+const getMatchingPoster = (name: string) => {
+  const match = name.match(/(hero|menu|scroll|hover|mouse|3d|webgl|physic|grid|sliders|text|svg|bg|pegetr|pagetr)-[0-9]+/i);
+  if (!match) return undefined;
+  const slug = match[0].toLowerCase();
+  const found = Object.entries(assetModules).find(([path]) => path.toLowerCase().includes(slug));
+  return found ? found[1] : undefined;
+};
+
 const getMotionClass = (category: string) => {
   if (category === '3d' || category === 'webgl') return 'preview-drift';
   if (category === 'scroll' || category === 'mouse' || category === 'hover') return 'preview-pan';
@@ -70,13 +78,19 @@ interface AnimationLibraryProps {
   onPreview?: (url: string) => void;
 }
 
-const LiveVideoCard: React.FC<{ src: string; className: string }> = ({ src, className }) => {
+const LiveVideoCard: React.FC<{
+  src: string;
+  className: string;
+  posterUrl?: string;
+  category: string;
+}> = ({ src, className, posterUrl, category }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || hasError) return;
 
     video.muted = true;
     video.defaultMuted = true;
@@ -121,23 +135,39 @@ const LiveVideoCard: React.FC<{ src: string; className: string }> = ({ src, clas
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [src]);
+  }, [src, hasError]);
+
+  if (hasError && posterUrl) {
+    return (
+      <img
+        src={posterUrl}
+        alt="Animation preview"
+        className={`animation-preview h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${getMotionClass(category)}`}
+      />
+    );
+  }
 
   return (
     <div className="relative w-full h-full bg-zinc-950 overflow-hidden" style={{ transform: 'translateZ(0)' }}>
       <video
         ref={videoRef}
         src={src}
+        poster={posterUrl}
         muted
         loop
         playsInline
         preload="metadata"
+        onError={() => setHasError(true)}
         onLoadedData={() => setIsLoaded(true)}
-        className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`${className} transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-90'}`}
         style={{ willChange: 'transform' }}
       />
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-zinc-900/60 animate-pulse" />
+      {!isLoaded && posterUrl && (
+        <img
+          src={posterUrl}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-80"
+        />
       )}
     </div>
   );
@@ -147,7 +177,7 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
   const [activeCategory, setActiveCategory] = useState('all');
   const [assetType, setAssetType] = useState<'video' | 'preview'>('video');
   const [itemsToShow, setItemsToShow] = useState(12);
-  const [activeModalVideo, setActiveModalVideo] = useState<string | null>(null);
+  const [activeModalVideo, setActiveModalVideo] = useState<{ url: string; poster?: string } | null>(null);
 
   const currentAssets = assetType === 'video' ? videoAssets : imageAssets;
 
@@ -231,13 +261,15 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
       <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         {visibleAssets.map((asset) => {
           const formattedTitle = cleanDisplayName(asset.displayName);
+          const poster = getMatchingPoster(asset.displayName);
+
           return (
             <div
               key={asset.name}
               style={{ contentVisibility: 'auto', containIntrinsicSize: '200px' }}
               onClick={() => {
                 if (asset.type === 'video') {
-                  setActiveModalVideo(asset.url);
+                  setActiveModalVideo({ url: asset.url, poster });
                 }
                 onPreview?.(asset.url);
               }}
@@ -247,6 +279,8 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
                 {asset.type === 'video' ? (
                   <LiveVideoCard
                     src={asset.url}
+                    posterUrl={poster}
+                    category={asset.category}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
@@ -301,7 +335,8 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
             className="relative w-full max-w-4xl rounded-3xl overflow-hidden border border-white/20 bg-zinc-950 shadow-2xl shadow-cyan-500/20"
           >
             <video
-              src={activeModalVideo}
+              src={activeModalVideo.url}
+              poster={activeModalVideo.poster}
               controls
               autoPlay
               loop
@@ -309,7 +344,7 @@ export const AnimationLibrary: React.FC<AnimationLibraryProps> = ({ onPreview })
               className="w-full h-auto max-h-[75vh] object-contain bg-black"
             />
             <div className="p-4 bg-zinc-900/95 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs font-mono text-zinc-200 truncate">{cleanDisplayName(getAssetName(activeModalVideo))}</span>
+              <span className="text-xs font-mono text-zinc-200 truncate">{cleanDisplayName(getAssetName(activeModalVideo.url))}</span>
               <button
                 onClick={() => setActiveModalVideo(null)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-mono text-white transition-colors"
