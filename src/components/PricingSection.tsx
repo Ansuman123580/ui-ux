@@ -54,7 +54,7 @@ export const PricingSection: React.FC = () => {
         amount: order.amount,
         currency: order.currency,
         name: 'Kinetic UI',
-        description: 'Awwwards Animation Pack — ₹1 Special Access',
+        description: 'Awwwards Animation Pack — ₹400 Lifetime Access',
         order_id: order.orderId,
         prefill: {
           email: email.trim(),
@@ -124,7 +124,7 @@ export const PricingSection: React.FC = () => {
           <div className="relative p-8 rounded-3xl bg-zinc-950/80 border border-cyan-500/30 flex flex-col justify-between shadow-2xl shadow-cyan-500/10 backdrop-blur-2xl">
             <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 text-zinc-950 text-[10px] font-black tracking-wider uppercase shadow-md flex items-center gap-1.5">
               <Zap className="w-3 h-3 fill-current" />
-              <span>TEST PASS • ₹1</span>
+              <span>80% OFF • LIMITED TIME DEAL</span>
             </div>
 
             <div>
@@ -136,7 +136,7 @@ export const PricingSection: React.FC = () => {
                   Full Animation Vault
                 </h3>
                 <span className="text-xs font-mono text-cyan-300 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-                  Instant Delivery
+                  Lifetime Pass
                 </span>
               </div>
               <p className="text-zinc-400 text-xs mt-3 leading-relaxed">
@@ -145,12 +145,15 @@ export const PricingSection: React.FC = () => {
 
               <div className="mt-6 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-baseline justify-between">
                 <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">₹1</span>
-                    <span className="text-xs text-zinc-400 font-mono line-through">₹1,000</span>
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">₹400</span>
+                    <span className="text-sm sm:text-base text-zinc-500 font-mono line-through decoration-rose-500/80 decoration-2">₹2,000</span>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono font-bold">
+                      SAVE 80%
+                    </span>
                   </div>
-                  <span className="text-[11px] text-cyan-400 font-mono mt-0.5 block">
-                    Special verification rate • One-time
+                  <span className="text-[11px] text-cyan-400 font-mono mt-1 block">
+                    एक बार का भुगतान • Lifetime updates included
                   </span>
                 </div>
                 <div className="text-right">
@@ -214,7 +217,7 @@ export const PricingSection: React.FC = () => {
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  <span>₹1 me Pro Access lein (Razorpay)</span>
+                  <span>₹400 me Pro Access lein (Razorpay)</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

@@ -1,4 +1,4 @@
-const PRICE_PAISE = 100; // ₹1 for test / special access
+const PRICE_PAISE = 40000; // ₹400 INR (Discounted from ₹2,000)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         amount: PRICE_PAISE,
         currency: 'INR',
         receipt: `kinetic_${Date.now()}`,
-        notes: { product: 'Kinetic UI Awwwards Motion Pack (₹1 Special Access)' },
+        notes: { product: 'Kinetic UI Awwwards Motion Pack (₹400 Lifetime Access)' },
       }),
     });
     const data = await response.json();
