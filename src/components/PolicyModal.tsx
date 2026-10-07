@@ -152,7 +152,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ initialTab = 'terms', 
 
                 <h4 className="font-semibold text-white">4. Intellectual Property Rights</h4>
                 <p className="text-zinc-400 text-xs">
-                  All intellectual property rights, trademarks, and code repositories of Obsidian Motion remain the property of the creator (Ansuman Maharana). Your purchase conveys a license of use, not an assignment of ownership.
+                  All intellectual property rights, trademarks, and code repositories of Obsidian Motion remain the exclusive property of Obsidian Motion Studio. Your purchase conveys a license of use, not an assignment of ownership.
                 </p>
               </div>
             </div>
@@ -290,7 +290,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ initialTab = 'terms', 
                       <span>Legal Business Name</span>
                     </div>
                     <p className="text-white text-xs font-mono">Obsidian Motion</p>
-                    <p className="text-zinc-500 text-[11px]">Operated by Ansuman Maharana (Individual / Proprietor)</p>
+                    <p className="text-zinc-500 text-[11px]">Independent Digital Design &amp; Software Studio</p>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/5 space-y-1">
@@ -299,7 +299,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ initialTab = 'terms', 
                       <span>Customer Support Email</span>
                     </div>
                     <p className="text-white text-xs font-mono">support@obsidianmotion.store</p>
-                    <p className="text-zinc-500 text-[11px]">Secondary: ansumanmaharana7@gmail.com</p>
+                    <p className="text-zinc-500 text-[11px]">Direct Developer Support Desk</p>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-white/5 space-y-1">

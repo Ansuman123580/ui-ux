@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
         {/* Bottom Details Row */}
         <div className="pt-4 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-zinc-500">
           <div>
-            © {new Date().getFullYear()} Obsidian Motion. Operated by Ansuman Maharana. All rights reserved.
+            © {new Date().getFullYear()} Obsidian Motion Studio. All rights reserved.
           </div>
           <div>
             Category: Digital Goods &amp; UI Design Software Templates
