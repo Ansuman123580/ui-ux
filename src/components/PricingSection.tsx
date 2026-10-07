@@ -54,7 +54,7 @@ export const PricingSection: React.FC = () => {
         amount: order.amount,
         currency: order.currency,
         name: 'Obsidian Motion',
-        description: 'Obsidian Motion Pack — ₹1 Test Pass',
+        description: 'Obsidian Motion Pack — ₹400 Lifetime Access',
         order_id: order.orderId,
         prefill: {
           email: email.trim(),
@@ -146,10 +146,10 @@ export const PricingSection: React.FC = () => {
               <div className="mt-6 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-baseline justify-between">
                 <div>
                   <div className="flex items-baseline gap-2.5">
-                    <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">₹1</span>
+                    <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">₹400</span>
                     <span className="text-sm sm:text-base text-zinc-500 font-mono line-through decoration-rose-500/80 decoration-2">₹2,000</span>
                     <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono font-bold">
-                      TEST PASS
+                      SAVE 80%
                     </span>
                   </div>
                   <span className="text-[11px] text-cyan-400 font-mono mt-1 block">
@@ -217,7 +217,7 @@ export const PricingSection: React.FC = () => {
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  <span>Unlock Test Access — ₹1</span>
+                  <span>Unlock Lifetime Access — ₹400</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
