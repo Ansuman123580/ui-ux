@@ -135,7 +135,7 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ initialTab = 'terms', 
 
                 <h4 className="font-semibold text-white">2. Single-User Commercial Developer License</h4>
                 <p className="text-zinc-400 text-xs">
-                  Upon purchase of the Obsidian Motion Lifetime Pass (₹400 INR one-time payment), the purchaser is granted a non-exclusive, perpetual, worldwide single-developer license to:
+                  Upon purchase of the Obsidian Motion Pass (one-time promotional / verification fee as displayed at checkout), the purchaser is granted a non-exclusive, perpetual, worldwide single-developer license to:
                 </p>
                 <ul className="list-disc pl-5 text-xs text-zinc-400 space-y-1">
                   <li>Use the UI components and motion code in unlimited personal and commercial client websites or applications.</li>
@@ -345,3 +345,4 @@ export const PolicyModal: React.FC<PolicyModalProps> = ({ initialTab = 'terms', 
     </div>
   );
 };
+

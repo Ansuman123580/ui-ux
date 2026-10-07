@@ -7,7 +7,7 @@ import { sendPurchaseEmail } from './mailer.mjs';
 const PORT = Number(process.env.PORT || 8787);
 const KEY_ID = process.env.RAZORPAY_KEY_ID;
 const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
-const PRICE_PAISE = 40000; // ₹400 INR (Discounted from ₹2,000)
+const PRICE_PAISE = 100; // ₹1 INR test
 const ARCHIVE_URL = process.env.ARCHIVE_URL_1 || 'https://drive.google.com/uc?export=download&id=1GNoRaPyKir7CWuNUz8XGi00P6cdCdVrU';
 
 const MAX_DOWNLOADS = 3; // Maximum allowed downloads per token

@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { sendPurchaseEmail } from '../server/mailer.mjs';
 
-const PRICE_PAISE = 40000; // ₹400 INR (Discounted from ₹2,000)
+const PRICE_PAISE = 100; // ₹1 INR test
 
 const signDownload = (pack) => {
   const expires = Date.now() + 24 * 60 * 60 * 1000;

@@ -1,4 +1,4 @@
-const PRICE_PAISE = 40000; // ₹400 INR (Discounted from ₹2,000)
+const PRICE_PAISE = 100; // ₹1 INR test
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
